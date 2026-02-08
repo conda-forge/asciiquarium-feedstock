@@ -1,0 +1,37 @@
+schema_version: 1
+
+context:
+  name: asciiquarium
+  version: 1.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://robobunny.com/projects/${{ name }}/${{ name }}_${{ version }}.tar.gz
+  sha256: 1b08c6613525e75e87546f4e8984ab3b33f1e922080268c749f1777d56c9d361
+
+build:
+  number: 1
+  noarch: generic
+  script: mkdir -p $PREFIX/bin && cp asciiquarium $PREFIX/bin/ && chmod +x $PREFIX/bin/asciiquarium
+
+requirements:
+  run:
+    - __unix
+    - perl
+
+tests:
+  - script:
+      - test -f $PREFIX/bin/asciiquarium
+
+about:
+  summary: Enjoy the mysteries of the sea from the safety of your own terminal!
+  license: GPL-2.0-only
+  license_file: gpl.txt
+  homepage: https://robobunny.com/projects/asciiquarium/html/
+
+extra:
+  recipe-maintainers:
+    - pavelzw
